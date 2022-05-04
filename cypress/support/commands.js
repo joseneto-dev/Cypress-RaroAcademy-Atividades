@@ -23,3 +23,20 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+Cypress.Commands.add('logar', function(email,senha){
+    cy.get('.card__login').within(() => {
+        cy.get('input[name="email"]').type(email, {force: true})
+        cy.get('input[name="password"]').type(senha, {force: true})
+        cy.contains('button', 'Acessar').click({force: true})
+    })  
+})
+Cypress.Commands.add('criaruser', function(email,nome,senha,confirmarSenha){
+    cy.get('.card__register').within(() => {
+        cy.get('input[name="email"]').type(email, { force: true });
+        cy.get('input[name="name"]').type(nome, { force: true });
+        cy.get('input[name="password"]').type(senha, { force: true });
+        cy.get('input[name="passwordConfirmation"]').type(confirmarSenha, { force: true });
+        cy.get('button[type="submit"]').click({force: true})
+    })
+}) 
+

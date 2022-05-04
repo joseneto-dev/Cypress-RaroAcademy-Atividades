@@ -16,8 +16,25 @@ describe('Login do usuario', () => {
 		cadastroPage.verificarModalUsuarioCriadoComSucesso()
 		cadastroPage.fecharmodal()
     });
-    
+
     it('Fazer o login', () => {
         logarPage.logar('joseneto@raro.com','123')
+        
     });
+    it.only('Fazer o login com informações incorretas', () => {
+        logarPage.logar('joseneto@raro.com','1234')
+        cy.wait(1000)
+        cy.contains("#modalText",
+			'Usuário ou senha inválido.Tente novamente ou verifique suas informações!'
+		)
+        //logarPage.verificaracessoincorreto()
+        logarPage.fecharmodal()
+
+    });
+    
+    });
+    it('logar sem informaçoes', () => {
+        cy.visit('https://bugbank.netlify.app/')
+        logarPage.logarsemcampos()
+        logarPage.verificarcampobrigatorio()
 })
